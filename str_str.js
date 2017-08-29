@@ -1,11 +1,30 @@
+// O(MN) M is the length of the needle
+// purpose is to make you think of edge cases
+
 var strStr = function(haystack, needle) {
   if (needle.length === 0) return 0;
 
-  array = haystack.split('');
+  var anchor = 0;
+  var runner = 0;
+  var count;
+  var match;
 
-  for (var i = 0; i < haystack.length; i++) {
-    if (haystack.substr(i, needle.length) === needle)
-      return i;
+  while (anchor <= haystack.length - needle.length) {
+    count = 0;
+    match = true;
+
+    while (count <= needle.length - 1) {
+      if (haystack[runner + count] !== needle[count]) {
+        match = false;
+        break;
+      }
+      count += 1;
+    }
+
+    if (match) return anchor;
+
+    anchor++;
+    runner++;
   }
 
   return -1;
