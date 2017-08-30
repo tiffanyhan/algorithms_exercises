@@ -49,13 +49,11 @@ require 'pry'
 # a recursive binary search version
 
 def search_range(nums, target)
-  return [-1, -1] if nums.empty? || !target
-
   start_range = find_start nums, target, 0, nums.length - 1
   return [-1, -1] if start_range == -1
 
   end_range = find_end nums, target, 0, nums.length - 1
-  return [start_range, end_range]
+  [start_range, end_range]
 end
 
 # base case is when left and right are adjacent
@@ -105,4 +103,3 @@ puts search_range([5,7,7,8,8,10], 1); # [-1,-1]
 puts search_range([1], 2); # [-1,-1]
 puts search_range([1], 1); # [0, 0]
 puts search_range([], 2); # [-1, -1]
-
