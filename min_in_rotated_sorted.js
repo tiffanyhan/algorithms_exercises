@@ -35,7 +35,7 @@
 // right = mid
 
 var findMin = function(nums) {
-  if (nums.length === 1) return nums[0];
+  if (nums[nums.length - 1] >= nums[0]) return nums[0];
 
   var left = 0;
   var right = nums.length - 1;
@@ -61,4 +61,3 @@ console.log(findMin([4,5,6,7,0,1,2])) // 0
 console.log(findMin([1])) // 1
 console.log(findMin([1,2])) // 1
 console.log(findMin([2,1])) // 1
-
