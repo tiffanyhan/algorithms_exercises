@@ -1,44 +1,29 @@
 var isPalindrome = function(s) {
-  if (typeof(s) !== 'string' || s.length === 0) {
-    return true;
-  }
+  if (s.length === 0) return true;
 
-  var pointerOne = 0;
-  var pointerTwo = s.length - 1;
-  var itemOne;
-  var itemTwo;
+  var left = 0;
+  var right = s.length - 1;
 
-  while (pointerOne < pointerTwo) {
-    while (!isAlphanumeric(s[pointerOne])) {
-      pointerOne++;
+  while (left < right) {
+    while (left < right && !/[a-z0-9]/i.test(s[left])) {
+      left++;
     }
 
-    while (!isAlphanumeric(s[pointerTwo])) {
-      pointerTwo--;
+    while (left < right && !/[a-z0-9]/i.test(s[right])) {
+      right--;
     }
 
-    itemOne = s[pointerOne].toLowerCase();
-    itemTwo = s[pointerTwo].toLowerCase();
-
-    if (itemOne !== itemTwo) {
+    if (s[left].toLowerCase() !== s[right].toLowerCase()) {
       return false;
-    } else {
-      pointerOne++;
-      pointerTwo--;
     }
+
+    left++;
+    right--;
   }
 
   return true;
 };
 
-function isAlphanumeric(char) {
-  if (!char) {
-    return false;
-  }
-
-  return char.match(/[A-z0-9]/);
-}
-
-console.log(isPalindrome("") === true);
-console.log(isPalindrome("A man, a plan, a canal: Panama") === true);
-console.log(isPalindrome("race a car") === false);
+console.log(isPalindrome('.,')) // true
+console.log(isPalindrome("`l;`` 1o1 ??;l`")) // true
+console.log(isPalindrome('a.')) // true
