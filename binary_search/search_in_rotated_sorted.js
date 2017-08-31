@@ -34,7 +34,7 @@
 // if (right > mid), youre on the rotated part and the min is to your left
 // right = mid
 
-var findMin = function(nums) {
+var search = function(nums, target) {
   if (nums[nums.length - 1] >= nums[0]) return nums[0];
 
   var left = 0;
@@ -57,7 +57,13 @@ var findMin = function(nums) {
   return nums[right];
 };
 
-console.log(findMin([4,5,6,7,0,1,2])) // 0
-console.log(findMin([1])) // 1
-console.log(findMin([1,2])) // 1
-console.log(findMin([2,1])) // 1
+console.log(findMin([4,5,6,7,0,1,2], 5)) // 1
+console.log(findMin([4,5,6,7,0,1,2], 1)) // 5
+console.log(findMin([4,5,6,7,0,1,2], 7)) // 3
+console.log(findMin([4,5,6,7,0,1,2], 3)) // -1
+console.log(findMin([1], 1)) // 0
+console.log(findMin([1], 2)) // -1
+console.log(findMin([1,2], 2)) // 1
+console.log(findMin([1,2], 0)) // -1
+console.log(findMin([2,1], 2)) // 0
+console.log(findMin([2,1], 11)) // -1

@@ -87,8 +87,8 @@ def find_max nums, max=-Float::INFINITY
   max
 end
 
-# puts find_max [5,7,0,1,0,-6,-3,10,2,2] # 10
-# puts find_max [-5, 8] # 8
+puts find_max [5,7,0,1,0,-6,-3,10,2,2] # 10
+puts find_max [-5, 8] # 8
 
 # returning an index requires a helper fn
 # whats the base case?

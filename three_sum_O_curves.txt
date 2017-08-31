@@ -1,0 +1,40 @@
+T: O(N^3), S: O(1)
+Naive, three nested loops
+
+
+T: O(N^2 LogN), S: O(1)
+
+for each a  --- n
+  b + c = -a, with O(N Log N) to work with
+
+  approach 1)
+    - sort the array: O(N Log N)
+    for each b - O(N)
+      - use binary search to c, which should be (-a - b) O(LogN)
+
+
+T: O(N^2), S: O(N)
+
+build hash table, with O(N) time, takes O(N) space
+
+for each a --- O(N)
+  ... left with O(N) to work out two sum
+  for each b --- O(N)
+    ... we have to find C with O(1) - hash table?
+
+
+T: O(N^2), S: O(1)
+
+sort the entire list, takes O(N Log N)
+
+for each a --- O(N)
+  ... left with O(N) to work out two sum
+    - find b + c = -a with O(N)
+      - two pointer
+
+T: O(N Log N), S: ?? --- can't do
+
+pre: sort? hash?
+
+for each a - O(N)
+    ... O(log N) to work with, to find out b + c = -a

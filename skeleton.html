@@ -10,6 +10,37 @@
   </head>
   <body>
     <script>
+var acc = 1;
+
+var myPow = function(x, n) {
+  acc *= x;
+
+  if (n === 0) return 1;
+  if (n === 1) return acc;
+
+  var absN = n > 0 ? n : 0 - n;
+  var result = myPow(x, absN - 1);
+
+  if (n < 0) result = 1 / result;
+  return result;
+};
+
+// console.log(myPow(5, 0)) // 1
+// acc = 1;
+// console.log(myPow(5, 1)) // 5
+// acc = 1;
+// console.log(myPow(2, 3)) // 8
+// acc = 1;
+// console.log(myPow(1, 20)) // 1
+// acc = 1;
+// console.log(myPow(0, 20)) // 0
+// acc = 1;
+// console.log(myPow(-2, 3)) // -8
+// acc = 1;
+// console.log(myPow(2, -3)) // .125
+// acc = 1;
+// console.log(myPow(1.00001, 123456)) //
+// acc = 1;
     </script>
   </body>
 </html>
