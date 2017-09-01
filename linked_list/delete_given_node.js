@@ -44,18 +44,12 @@ function LinkedList() {
 
 var deleteNode = function(node) {
   node.val = node.next.val
-
-  if (!node.next.next) {
-    node.next = null;
-    return;
-  }
-
-  deleteNode(node.next);
+  node.next = node.next.next;
 };
 
-// 3=>4=>null
-// 4=>4=>null
-// 4=>null
+// 3=>4=>5=>null
+// 4=>4=>5=>null
+// 4=>5=>null
 
 // 1=>2=>3=>4
 // given 3=>4=null
