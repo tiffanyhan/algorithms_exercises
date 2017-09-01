@@ -59,81 +59,67 @@ function LinkedList() {
 // 1<=2<=3<=4<=5<=6
 // return 6
 
-var reverseList = function(head) {
-  var prev = null;
-  var current = head;
-  var temp;
+// var reverseList = function(head) {
+//   var prev = null;
+//   var current = head;
+//   var temp;
 
-  while (current) {
-    temp = current.next;
-    current.next = prev;
-    prev = current;
-    current = temp;
-  }
+//   while (current) {
+//     temp = current.next;
+//     current.next = prev;
+//     prev = current;
+//     current = temp;
+//   }
 
-  return prev;
-};
+//   return prev;
+// };
 
 // recursive approach
 // what's the base case?
 // when you get to the last node
 
+function reverseList(head) {
+  if (!head)      return null;
+  if (!head.next) return head;
 
-// function reverseList(head) {
-//   if (!head)      return null;
-//   if (!head.next) return head;
+  tailHead = reverseList(head.next);
+  head.next.next = head;
+  head.next = null;
+  return tailHead;
+}
 
-//   tailHead = reverseList(head.next);
-//   head.next.next = head;
-//   head.next = null;
-//   return tailHead;
-// }
+// var linkedList = new LinkedList();
+// linkedList.add(4);
+// linkedList.add(5);
+// linkedList.add(6);
+// reverseList(linkedList.head); // [6,5]
 
 // [1,2,3,4,5,6,null]
+
 // [5,6,null]
 // reverseList(6) => 6
 
 // reverseList(5)
 // tailHead = 6
-// [5,6,null] => [5,null,5]
+// [5,6,null] => [5,6,5]
+//               [5,null,5]
+//                  [6,5,null]
+//     5=>6=>null, 5<=>6, 6=>5=>null
+// BEFORE we set next to null, 5 <=> 6 hence the Circularity
 // return 6
 
 // reverseList(4)
-// tailHead = 6
-// [4,5,null,5] => [4,null,4,5]
+// tailHead = 6=>5=>null
+// 4=>5=>null, 4<=>5, 6=>5=>4=>null
 
-// Node { val: 5, next: Node { val: 6, next: null } }
-// =>
-// Node { val: 5, next: null }
-
-// Node { val: 4, next: Node { val: 5, next: null } }
-// =>
-// Node { val: 4, next: null }
-
-// Node { val: 3, next: Node { val: 4, next: null } }
-// =>
-// Node { val: 3, next: null }
-
-// Node { val: 2, next: Node { val: 3, next: null } }
-// =>
-// Node { val: 2, next: null }
-
-// Node { val: 1, next: Node { val: 2, next: null } }
-// =>
-// Node { val: 1, next: null }
-
-// Node {
-//   val: 6,
-//   next: Node { val: 5, next: Node { val: 4, next: [Object] } } }
-
-var linkedList = new LinkedList();
-linkedList.add(1);
-linkedList.add(2);
-linkedList.add(3);
-linkedList.add(4);
-linkedList.add(5);
-linkedList.add(6);
-console.log(reverseList(linkedList.head)); // [6,5,4,3,2,1]
+// var linkedList = new LinkedList();
+// linkedList.add(1);
+// linkedList.add(2);
+// linkedList.add(3);
+// linkedList.add(4);
+// linkedList.add(5);
+// linkedList.add(6);
+// console.log(reverseList(linkedList.head)); // [6,5,4,3,2,1]
 
 // linkedList = new LinkedList();
 // linkedList.add(1);
