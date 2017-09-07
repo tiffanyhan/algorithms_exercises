@@ -10,9 +10,7 @@ end
 # @param {TreeNode} root
 # @return {Boolean}
 def is_valid_bst(root)
-  return true if !root
-
-  helper root.left, acc=[]
+  helper root, acc=[]
 
   i = 1
   while i < acc.length
