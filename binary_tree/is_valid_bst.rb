@@ -7,6 +7,15 @@ class TreeNode
   end
 end
 
+# divide and conquer solution
+def is_valid_bst(root, min=nil, max=nil)
+  return true if !root
+
+  return false if (min && root.val <= min.val) || (max && root.val >= max.val)
+
+  return is_valid_bst(root.left, min, root) && is_valid_bst(root.right, root, max)
+end
+
 # @param {TreeNode} root
 # @return {Boolean}
 def is_valid_bst(root)
