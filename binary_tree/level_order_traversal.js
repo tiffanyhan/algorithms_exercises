@@ -64,3 +64,47 @@ var levelOrder = function(root) {
 
   return vals;
 };
+
+// a solution using only one queue
+
+// when i first enter the while loop, the size of my queue is
+// the size of the level
+// initiate a new array?
+
+// use a second loop to process the level
+// if on the first index, add an array first
+// add val to last index of vals
+
+// keep length of queue in outer variable
+// decrement length within inner loop
+
+var levelOrder = function(root) {
+  var vals      = [];
+  var queue     = [];
+  var current;
+  var needsArray;
+  var levelSize;
+
+  if (root) queue.push(root);
+
+  while (queue.length > 0) {
+    needsArray = true;
+    levelSize  = queue.length;
+
+    while (levelSize > 0) {
+      if (needsArray) {
+        vals.push([]);
+        needsArray = false;
+      }
+
+      current = queue.shift();
+      vals[vals.length - 1].push(current.val);
+      if (current.left)  queue.push(current.left);
+      if (current.right) queue.push(current.right);
+
+      levelSize--;
+    }
+  }
+
+  return vals;
+};
