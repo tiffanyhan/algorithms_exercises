@@ -57,9 +57,7 @@ end
 # divide and conquer solution
 def is_valid_bst(root, min=nil, max=nil)
   return true if !root
-
   return false if (min && root.val <= min.val) || (max && root.val >= max.val)
-
   return is_valid_bst(root.left, min, root) && is_valid_bst(root.right, root, max)
 end
 
@@ -83,4 +81,23 @@ def helper(root, acc)
   helper root.left, acc
   acc.push root.val
   helper root.right, acc
+end
+
+# do an inorder traversal
+# each time check if prev is less than current
+# carry state, do i have to keep track of boolean too?
+
+def is_valid_bst root
+  valid_bst_helper root
+end
+
+def valid_bst_helper root, memo={prev: nil}
+  return true if !root
+
+  return false unless valid_bst_helper root.left,  memo
+  return false if memo[:prev] && memo[:prev] >= root.val
+  memo[:prev]  = root.val
+  return false unless valid_bst_helper root.right, memo
+
+  true
 end
