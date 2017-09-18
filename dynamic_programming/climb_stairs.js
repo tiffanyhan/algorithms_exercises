@@ -20,6 +20,11 @@
  * @param {number} n
  * @return {number}
  */
+
+// T: linear, bc you only look at prev 2 steps. 2 is always fixed.
+// to process each node, there is a constant # of steps
+// but you still have to visit each node
+
 var climbStairs = function(n) {
   return helper(n);
 };
@@ -32,3 +37,16 @@ function helper(n, cache={}) {
 
   return cache[n] = allWaysToPrevStep + allWaysToPrevPrevStep;
 }
+
+// ===============================
+// iterative traversal
+
+var climbStairs = function(n) {
+  var cache = [1, 1];
+
+  for (var i = 2; i <= n; i++) {
+    cache[i] = cache[i - 1] + cache[i - 2];
+  }
+
+  return cache[n];
+};

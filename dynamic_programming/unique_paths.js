@@ -30,7 +30,6 @@ var uniquePaths = function(rows, cols) {
 };
 
 function helper(row, col, cache) {
-  if (row < 0 || col < 0)     return 0;
   if (row === 0 && col === 0) return 1;
 
   var allPathsFromTop;
