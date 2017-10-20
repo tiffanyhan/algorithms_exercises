@@ -1,27 +1,42 @@
-# Definition for a binary tree node.
-# class TreeNode
-#     attr_accessor :val, :left, :right
-#     def initialize(val)
-#         @val = val
-#         @left, @right = nil, nil
-#     end
-# end
+# recursively switch left and right
 
-# @param {TreeNode} root
-# @return {TreeNode}
+#      4
+#    /   \
+#   2     7
+#  / \   / \
+# 1   3 6   9
+# to
+#      4
+#    /   \
+#   7     2
+#  / \   / \
+# 9   6 3   1
 
-def invert_tree root
-  return root unless root
+#      4
+#    /   \
+#   2     7
+#  / \   / \
+# 3   1 9   6
 
-  left_node  = invert_tree root.left
-  right_node = invert_tree root.right
+#      4
+#    /   \
+#   7     2
+#  / \   / \
+# 9   6 3   1
 
-  root.left  = right_node
-  root.right = left_node
+def invert_tree(root)
+  return nil unless root
+
+  left_inverted  = invert_tree(root.left)
+  right_inverted = invert_tree(root.right)
+
+  root.left  = right_inverted
+  root.right = left_inverted
+
   root
 end
 
-# preorder traversal approach
+# preorder traversal approach ???
 
 def invert_tree(root)
   return root unless root
@@ -35,20 +50,3 @@ def invert_tree(root)
 
   return root
 end
-
-# divide and conquer approach
-
-# def invert_tree(root)
-#   return root unless root
-
-#   left, right = root.left, root.right
-
-#   left_result  = invert_tree(left)
-#   right_result = invert_tree(right)
-
-#   # combine, everything before this is template
-
-#   root.left  = right_result
-#   root.right = left_result
-#   root
-# end

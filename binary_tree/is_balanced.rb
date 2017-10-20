@@ -20,10 +20,14 @@
 
 # @param {TreeNode} root
 # @return {Boolean}
-def is_balanced(root)
-  return true if !root
-  difference  = (max_depth(root.left) - max_depth(root.right)).abs
-  difference <= 1 && is_balanced(root.left) && is_balanced(root.right)
+def is_balanced(root, memo={prevDepth: 0})
+  return true unless root
+
+  left, right = root.left, root.right
+  # order of conditionals optimized for short-circuiting
+  is_balanced(left,  memo) &&
+  is_balanced(right, memo) &&
+  (max_depth(left) - max_depth(right)).abs <= 1
 end
 
 def max_depth(root)
@@ -34,4 +38,27 @@ def max_depth(root)
 
   greater_depth = left_depth > right_depth ? left_depth : right_depth
   greater_depth
+end
+
+# O(N) solution
+
+def is_balanced(root)
+  memo = { balanced: true }
+  helper(root, memo)
+  memo[:balanced]
+end
+
+def helper(root, memo)
+  return 0 unless root
+  return   unless memo[:balanced]
+
+  left_depth      = helper(root.left, memo)  || return
+  right_depth     = helper(root.right, memo) || return
+  current_depth   = [left_depth, right_depth].max + 1
+
+  if (left_depth - right_depth).abs > 1
+    memo[:balanced] = false
+  end
+
+  current_depth
 end
