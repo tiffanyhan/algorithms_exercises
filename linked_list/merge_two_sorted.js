@@ -45,20 +45,39 @@ function LinkedList() {
 var mergeTwoLists = function(h1, h2) {
   if (!h1 && !h2) return null;
 
-  var headMin;
+  var currMin;
   if ((h1 && h2 && h1.val <= h2.val) || (!h2)) {
-    headMin = h1;
+    currMin = h1;
     h1 = h1.next;
   } else if ((h1 && h2 && h2.val <= h1.val) || (!h1)) {
-    headMin = h2;
+    currMin = h2;
     h2 = h2.next;
   }
 
   if (h1 || h2)
-    headMin.next = mergeTwoLists(h1, h2);
+    currMin.next = mergeTwoLists(h1, h2);
 
-  return headMin;
+  return currMin;
 };
+
+// more semantic
+
+function mergeTwoLists(head1, head2) {
+  if (!head1 && !head2) return null;
+  if ( head1 && !head2) return head1;
+  if (!head1 &&  head2) return head2;
+
+  if (head1.val <= head2.val) {
+    return append(head1, mergeTwoLists(head1.next, head2))
+  } else {
+    return append(head2, mergeTwoLists(head1, head2.next));
+  }
+}
+
+function append(head, tail) {
+  head.next = tail;
+  return head;
+}
 
 linkedList1 = new LinkedList();
 linkedList1.add(5);

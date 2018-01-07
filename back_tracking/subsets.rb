@@ -104,6 +104,42 @@ require 'pry'
 # EACH NODE represents a solution
 # branching logic is complicated, so dead-end logic is nil
 
+helper
+  add subset to subsets
+
+  iterate thru each num in nums
+    add num to subset
+    recurse, but start iteration at current index + 1
+    recursion cleanup
+
+# []
+# 0..2
+
+# [1]
+# 1..2
+
+# [1,2]
+# 2..2
+
+# [1,2,3]
+# 3..2 base case return
+
+# []
+# 1..2
+
+# [2]
+# 2..2
+
+# [2,3]
+
+# 3..2 base case return
+
+# []
+# 2..2
+
+# [3]
+# 3..2 base case return
+
 def subsets nums
   subsets_helper nums, result=[], [], 0
   result
@@ -121,12 +157,6 @@ end
 
 p subsets([1,2,3])
 
-def subsets(nums)
-  result = []
-  subsets_helper(nums, [], result)
-  result
-end
-
 # explicit solution
 
 # solution: a valid subset
@@ -134,22 +164,38 @@ end
 # prune: none
 # backtrack: pop
 
-def subsets_helper(nums, solution, result)
-  if solution.size == nums.size
-    result << apply_mask(nums, solution)
-  else
-    [true, false].each do |boolean|
-      solution << boolean
-      subsets_helper(nums, solution, result)
-      solution.pop
-    end
+# helper(nums, booleans, subsets)
+#   if length of booleans is equal to length of nums, apply mask
+#     and add resulting subset to subsets
+
+#   iterate through T/F
+#     add boolean to booleans
+#     recurse
+#     recursion cleanup
+# apply_mask(nums, booleans)
+#   from 0 to nums.length - 1
+#     subset << nums[index] if booleans[index]
+
+def subsets(nums)
+  subsets = []
+  subsets_helper(nums, [], subsets)
+  subsets
+end
+
+def subsets_helper(nums, booleans, subsets)
+  return subsets << apply_mask(nums, booleans) if booleans.length == nums.length
+
+  [true, false].each do |boolean|
+    booleans << boolean
+    subsets_helper(nums, booleans, subsets)
+    booleans.pop
   end
 end
 
-def apply_mask(array, booleans)
-  result = []
-  array.each_with_index do |num, index|
-    result << num if booleans[index]
+def apply_mask(nums, booleans)
+  subsets = []
+  nums.each_with_index do |num, index|
+    subsets << num if booleans[index]
   end
-  result
+  subsets
 end

@@ -65,4 +65,3 @@ linkedList.add(4);
 console.log(linkedList.head.next);
 console.log(deleteNode(linkedList.head.next.next)); // 1=>2=>4
 console.log(linkedList.head.next);
-

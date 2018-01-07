@@ -29,50 +29,52 @@ function LinkedList() {
   }
 }
 
-// T: O(N), S: O(N) iterative approach
-
-// var reverseList = function(head) {
-//   var dummy = new Node(null);
-//   dummy.next = head;
-
-//   var current = dummy;
-//   var array = [];
-
-//   while (current.next) {
-//     array.unshift(current.next.val);
-//     current = current.next;
-//   }
-
-//   current = dummy;
-
-//   while (current.next) {
-//     current.next.val = array.shift();
-//     current = current.next;
-//   }
-
-//   return dummy.next;
-// };
-
 // T: O(N), S: O(1)
 
 // 1=>2=>3=>4=>5=>6
 // 1<=2<=3<=4<=5<=6
 // return 6
 
-// var reverseList = function(head) {
-//   var prev = null;
-//   var current = head;
-//   var temp;
+// 1<=2, lost reference to 3
 
-//   while (current) {
-//     temp = current.next;
-//     current.next = prev;
-//     prev = current;
-//     current = temp;
-//   }
+// prev, current, next
+// null    1       2
+// current points to prev
 
-//   return prev;
-// };
+// prev, current, next
+// 1       2       3
+
+// prev, current, next
+// 1       2       3
+
+// null<=1    2=>3=>4=>5=>6
+
+// null<=1<=2    3=>4=>5=>6
+
+// null<=1<=2<=3    4=>5=>6
+
+// null<=1<=2<=3<=4    5=>6
+
+// null<=1<=2<=3<=4<=5    6
+
+// null<=1<=2<=3<=4<=5<=6
+
+// 6=>5=>4=>3=>2=>1
+
+var reverseList = function(head) {
+  var prev = null;
+  var current = head;
+  var temp;
+
+  while (current) {
+    temp = current.next;
+    current.next = prev;
+    prev = current;
+    current = temp;
+  }
+
+  return prev;
+};
 
 // recursive approach
 // what's the base case?

@@ -12,7 +12,7 @@ def level_order_traverse(root)
       curr_level.shift # dequeue first in line
     end
 
-    break if next_level.empty? # no more levels left!
+    break if next_level.empty? # no more levels left! curr_level had no children
     curr_level = next_level # else go to next level
     next_level = [] # and reset everything
   end
